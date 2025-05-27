@@ -1,50 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sheldome Hotel Support</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #f7f8fc, #e2e8f0);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+      color: #333;
+    }
+
+    .container {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .logo {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin: 0;
+      color: #2c3e50;
+    }
+
+    form label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: 600;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 0.6rem;
+      margin-top: 0.3rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    input[type="submit"] {
+      margin-top: 1.5rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #0070f3;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #0059c1;
+    }
+  </style>
 </head>
 <body>
-    <!--  ----------------------------------------------------------------------  -->
-<!--  NOTE: Please add the following <META> element to your page <HEAD>.      -->
-<!--  If necessary, please modify the charset parameter to specify the        -->
-<!--  character set of your HTML page.                                        -->
-<!--  ----------------------------------------------------------------------  -->
 
-<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+  <div class="container">
+    <div class="header">
+      <img src="https://i.imgur.com/7vYtG5D.png" alt="Sheldome Logo" class="logo"> <!-- Replace with your own logo URL -->
+      <h1>Sheldome Hotel Support</h1>
+    </div>
 
-    <!--  ----------------------------------------------------------------------  -->
-    <!--  NOTE: Please add the following <FORM> element to your page.             -->
-    <!--  ----------------------------------------------------------------------  -->
-    
     <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgL0000045BoX" method="POST">
-    
-    <input type=hidden name="orgid" value="00DgL0000045BoX">
-    <input type=hidden name="retURL" value="http://">
-    
-    <!--  ----------------------------------------------------------------------  -->
-    <!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
-    <!--  these lines if you wish to test in debug mode.                          -->
-    <!--  <input type="hidden" name="debug" value=1>                              -->
-    <!--  <input type="hidden" name="debugEmail" value="krmicr17@gmail.com">      -->
-    <!--  ----------------------------------------------------------------------  -->
-    
-    <label for="name">Contact Name</label><input  id="name" maxlength="80" name="name" size="20" type="text" /><br>
-    
-    <label for="email">Email</label><input  id="email" maxlength="80" name="email" size="20" type="text" /><br>
-    
-    <label for="phone">Phone</label><input  id="phone" maxlength="40" name="phone" size="20" type="text" /><br>
-    
-    <label for="subject">Subject</label><input  id="subject" maxlength="80" name="subject" size="20" type="text" /><br>
-    
-    <label for="description">Description</label><textarea name="description"></textarea><br>
-    
-    Booking_ID Text:<input  id="00NgL00000yZoNy" maxlength="50" name="00NgL00000yZoNy" size="20" type="text" /><br>
-    
-    <input type="submit" name="submit">
-    
+      <input type="hidden" name="orgid" value="00DgL0000045BoX">
+      <input type="hidden" name="retURL" value="http://">
+
+      <label for="name">Contact Name</label>
+      <input id="name" maxlength="80" name="name" size="20" type="text" required>
+
+      <label for="email">Email</label>
+      <input id="email" maxlength="80" name="email" size="20" type="email" required>
+
+      <label for="phone">Phone</label>
+      <input id="phone" maxlength="40" name="phone" size="20" type="text">
+
+      <label for="subject">Subject</label>
+      <input id="subject" maxlength="80" name="subject" size="20" type="text" required>
+
+      <label for="description">Description</label>
+      <textarea name="description"></textarea>
+
+      <label for="00NgL00000yZoNy">Booking ID</label>
+      <input id="00NgL00000yZoNy" maxlength="50" name="00NgL00000yZoNy" size="20" type="text">
+
+      <input type="submit" name="submit" value="Submit Request">
     </form>
-    
+  </div>
+
 </body>
 </html>
