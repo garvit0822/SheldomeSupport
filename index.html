@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sheldome Hotel Support</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    /* Reset & Base */
     * {
       margin: 0;
       padding: 0;
@@ -16,11 +16,11 @@
       font-family: 'Poppins', sans-serif;
       background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
       background-size: cover;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
+      padding: 20px;
     }
 
     .container {
@@ -29,10 +29,11 @@
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       padding: 2rem;
-      width: 90%;
+      width: 100%;
       max-width: 600px;
       box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
       border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #fff;
     }
 
     .header {
@@ -51,11 +52,36 @@
       text-shadow: 1px 1px 2px #000;
     }
 
+    .choice-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 2rem;
+    }
+
+    .choice-buttons button {
+      background-color: #ff5a5f;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 20px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .choice-buttons button:hover {
+      background-color: #e14a4f;
+    }
+
     form label {
       display: block;
       margin-top: 1rem;
       margin-bottom: 0.3rem;
       font-weight: 600;
+      color: #fff;
+      text-shadow: 1px 1px 1px #000;
     }
 
     input[type="text"],
@@ -79,7 +105,7 @@
       margin-top: 1.5rem;
       width: 100%;
       padding: 0.75rem;
-      background-color: #ff5a5f;
+      background-color: #4CAF50;
       color: white;
       border: none;
       border-radius: 8px;
@@ -90,49 +116,91 @@
     }
 
     input[type="submit"]:hover {
-      background-color: #e14a4f;
+      background-color: #45a049;
     }
 
-    label {
-      color: #fff;
-      text-shadow: 1px 1px 1px #000;
+    .form-section {
+      display: none;
+    }
+
+    .form-section.active {
+      display: block;
     }
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-
   <div class="container">
     <div class="header">
       <img src="sheldomelogo.png" alt="Sheldome Logo" class="logo" />
       <h1>Sheldome Hotel Support</h1>
     </div>
 
-    <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgL0000045BoX" method="POST">
-      <input type="hidden" name="orgid" value="00DgL0000045BoX">
-      <input type="hidden" name="retURL" value="http://">
+    <div class="choice-buttons">
+      <button onclick="showForm('feedback')">Feedback</button>
+      <button onclick="showForm('complaint')">Complaint</button>
+    </div>
 
-      <label for="name">Contact Name</label>
-      <input id="name" maxlength="80" name="name" size="20" type="text" required>
+    <!-- Feedback Form -->
+    <div id="feedback" class="form-section">
+      <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgL0000045BoX" method="POST">
+        <input type="hidden" name="orgid" value="00DgL0000045BoX">
+        <input type="hidden" name="retURL" value="http://">
 
-      <label for="email">Email</label>
-      <input id="email" maxlength="80" name="email" size="20" type="email" required>
+        <label for="name">Contact Name</label>
+        <input id="name" name="name" maxlength="80" type="text" required>
 
-      <label for="phone">Phone</label>
-      <input id="phone" maxlength="40" name="phone" size="20" type="text">
+        <label for="phone">Phone</label>
+        <input id="phone" name="phone" maxlength="40" type="text">
 
-      <label for="subject">Subject</label>
-      <input id="subject" maxlength="80" name="subject" size="20" type="text" required>
+        <label for="subject">Subject</label>
+        <input id="subject" name="subject" maxlength="80" type="text" required>
 
-      <label for="description">Description</label>
-      <textarea name="description"></textarea>
+        <label for="description">Description</label>
+        <textarea name="description"></textarea>
 
-      <label for="00NgL00000yZoNy">Booking ID</label>
-      <input id="00NgL00000yZoNy" maxlength="50" name="00NgL00000yZoNy" size="20" type="text">
+        <label for="00NgL00000yZoNy">Booking ID</label>
+        <input id="00NgL00000yZoNy" name="00NgL00000yZoNy" maxlength="50" type="text">
 
-      <input type="submit" name="submit" value="Submit Request">
-    </form>
+        <input type="submit" value="Submit Feedback">
+      </form>
+    </div>
+
+    <!-- Complaint Form -->
+    <div id="complaint" class="form-section">
+      <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgL0000045BoX" method="POST">
+        <input type="hidden" name="orgid" value="00DgL0000045BoX">
+        <input type="hidden" name="retURL" value="http://">
+
+        <label for="name2">Contact Name</label>
+        <input id="name2" name="name" maxlength="80" type="text" required>
+
+        <label for="email">Email</label>
+        <input id="email" name="email" maxlength="80" type="email" required>
+
+        <label for="phone2">Phone</label>
+        <input id="phone2" name="phone" maxlength="40" type="text">
+
+        <label for="subject2">Subject</label>
+        <input id="subject2" name="subject" maxlength="80" type="text" required>
+
+        <label for="description2">Description</label>
+        <textarea name="description"></textarea>
+
+        <label for="00NgL00000yZoNy2">Booking ID</label>
+        <input id="00NgL00000yZoNy2" name="00NgL00000yZoNy" maxlength="50" type="text">
+
+        <input type="submit" value="Submit Request">
+      </form>
+    </div>
   </div>
 
+  <script>
+    function showForm(type) {
+      document.getElementById('feedback').classList.remove('active');
+      document.getElementById('complaint').classList.remove('active');
+
+      document.getElementById(type).classList.add('active');
+    }
+  </script>
 </body>
 </html>
