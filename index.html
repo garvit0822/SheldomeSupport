@@ -45,12 +45,7 @@
       width: 100%; padding: 0.85rem; border-radius: 8px; border: none; font-size: 1.1rem;
       background: rgba(255,255,255,0.9); color: #333;
     }
-    input[type="number"]#rating {
-      font-size: 2rem;
-      padding: 1rem;
-      text-align: center;
-    }
-    textarea { resize: vertical; min-height: 100px; }
+    textarea { resize: vertical; min-height: 120px; }
     input[type="submit"] {
       width: 100%; margin-top: 1.5rem; padding: 0.75rem;
       background-color: #4CAF50; color: #fff; border: none; border-radius: 8px;
@@ -74,11 +69,11 @@
     <!-- Feedback Form -->
     <div id="feedback" class="form-section">
       <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgL0000045BoX" method="POST">
-        <input type="hidden" name="orgid" value="00DgL0000045BoX" />
-        <input type="hidden" name="retURL" value="success.html" />
+        <input type="hidden" name="orgid" value="00DgL0000045BoX">
+        <input type="hidden" name="retURL" value="https://yourusername.github.io/your-repo-name/success.html">
 
         <label for="rating">Rating (1–5)</label>
-        <input id="rating" name="00NgL00000ytr4L" type="number" min="1" max="5" required />
+        <input id="rating" name="00NgL00000ytr4L" type="number" min="1" max="5" required style="font-size: 1.2rem;" />
 
         <label for="fb_booking">Booking ID</label>
         <input id="fb_booking" name="00NgL00000yZoNy" maxlength="50" type="text" required />
@@ -93,8 +88,8 @@
     <!-- Complaint Form -->
     <div id="complaint" class="form-section">
       <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgL0000045BoX" method="POST">
-        <input type="hidden" name="orgid" value="00DgL0000045BoX" />
-        <input type="hidden" name="retURL" value="success.html" />
+        <input type="hidden" name="orgid" value="00DgL0000045BoX">
+        <input type="hidden" name="retURL" value="https://yourusername.github.io/your-repo-name/success.html">
 
         <label for="cp_name">Contact Name</label>
         <input id="cp_name" name="name" maxlength="80" type="text" required />
@@ -121,9 +116,7 @@
 
   <script>
     function showForm(formId) {
-      document.querySelectorAll('.form-section').forEach(section => {
-        section.classList.remove('active');
-      });
+      document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
       document.getElementById(formId).classList.add('active');
     }
   </script>
