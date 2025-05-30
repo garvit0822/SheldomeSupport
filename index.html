@@ -78,24 +78,41 @@
 
     <!-- Feedback Form -->
     <div id="feedback" class="form-section">
-      <form onsubmit="return handleSubmit(event, 'feedback-msg')">
+      <form 
+        action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgL0000045BoX"
+        method="POST" 
+        onsubmit="return validateFeedbackForm();"
+        target="hidden_iframe_feedback"
+      >
+        <input type="hidden" name="orgid" value="00DgL0000045BoX" />
+        <input type="hidden" name="retURL" value="javascript:showMessage('feedback-msg');" />
+
         <label for="rating">Rating (1-5)</label>
-        <input id="rating" name="rating" type="number" min="1" max="5" required />
+        <input id="rating" name="00NgL00000ytr4L" type="number" min="1" max="5" required />
 
         <label for="fb_booking">Booking ID</label>
-        <input id="fb_booking" name="bookingId" maxlength="50" type="text" required />
+        <input id="fb_booking" name="00NgL00000yZoNy" maxlength="50" type="text" required />
 
         <label for="feedback_text">Feedback</label>
-        <textarea id="feedback_text" name="feedbackText" rows="3" required></textarea>
+        <textarea id="feedback_text" name="00NgL00000ytpqX" required></textarea>
 
         <input type="submit" name="submit" value="Submit Feedback" />
         <div class="message" id="feedback-msg">✅ Feedback submitted successfully!</div>
       </form>
+      <iframe name="hidden_iframe_feedback" style="display:none;"></iframe>
     </div>
 
     <!-- Complaint Form -->
     <div id="complaint" class="form-section">
-      <form onsubmit="return handleSubmit(event, 'complaint-msg')">
+      <form 
+        action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgL0000045BoX"
+        method="POST" 
+        onsubmit="return validateComplaintForm();"
+        target="hidden_iframe_complaint"
+      >
+        <input type="hidden" name="orgid" value="00DgL0000045BoX" />
+        <input type="hidden" name="retURL" value="javascript:showMessage('complaint-msg');" />
+
         <label for="cp_name">Contact Name</label>
         <input id="cp_name" name="name" maxlength="80" type="text" required />
 
@@ -112,11 +129,12 @@
         <textarea id="cp_description" name="description" required></textarea>
 
         <label for="cp_booking">Booking ID</label>
-        <input id="cp_booking" name="bookingId" maxlength="50" type="text" required />
+        <input id="cp_booking" name="00NgL00000yZoNy" maxlength="50" type="text" required />
 
         <input type="submit" value="Submit Complaint" />
         <div class="message" id="complaint-msg">✅ Complaint submitted successfully!</div>
       </form>
+      <iframe name="hidden_iframe_complaint" style="display:none;"></iframe>
     </div>
   </div>
 
@@ -126,15 +144,25 @@
       document.getElementById(formId).classList.add('active');
     }
 
-    function handleSubmit(event, messageId) {
-      event.preventDefault();
-      const message = document.getElementById(messageId);
-      message.style.display = 'block';
-      setTimeout(() => {
-        message.style.display = 'none';
-      }, 4000);
-      event.target.reset();
-      return false;
+    function showMessage(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.style.display = 'block';
+        setTimeout(() => el.style.display = 'none', 4000);
+      }
+    }
+
+    function validateFeedbackForm() {
+      const rating = document.getElementById('rating').value;
+      if (rating < 1 || rating > 5) {
+        alert('Please enter a rating between 1 and 5.');
+        return false;
+      }
+      return true;
+    }
+
+    function validateComplaintForm() {
+      return true; // Add custom complaint validations if needed
     }
   </script>
 </body>
