@@ -41,12 +41,14 @@
       display: block; margin-top: 1rem; margin-bottom: 0.3rem;
       font-weight: 600; text-shadow: 1px 1px 1px #000;
     }
-    input[type="text"], input[type="email"], textarea, input[type="number"] {
-      width: 100%; padding: 0.65rem; border-radius: 8px; border: none; font-size: 1rem;
+    input[type="text"], input[type="email"], input[type="number"], textarea {
+      width: 100%; padding: 0.85rem; border-radius: 8px; border: none; font-size: 1.1rem;
       background: rgba(255,255,255,0.9); color: #333;
     }
-    input[type="number"] {
-      height: 3rem;
+    input[type="number"]#rating {
+      font-size: 2rem;
+      padding: 1rem;
+      text-align: center;
     }
     textarea { resize: vertical; min-height: 100px; }
     input[type="submit"] {
@@ -55,16 +57,6 @@
       font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: background 0.3s;
     }
     input[type="submit"]:hover { background-color: #45a049; }
-    .confirmation {
-      text-align: center;
-      margin-top: 1.2rem;
-      font-weight: bold;
-      color: #dfffe2;
-      background-color: rgba(0, 128, 0, 0.6);
-      padding: 10px;
-      border-radius: 8px;
-      display: none;
-    }
   </style>
 </head>
 <body>
@@ -81,9 +73,9 @@
 
     <!-- Feedback Form -->
     <div id="feedback" class="form-section">
-      <form onsubmit="handleSubmit(event, 'feedbackConfirm')" action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgL0000045BoX" method="POST">
+      <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgL0000045BoX" method="POST">
         <input type="hidden" name="orgid" value="00DgL0000045BoX" />
-        <input type="hidden" name="retURL" value="http://" />
+        <input type="hidden" name="retURL" value="success.html" />
 
         <label for="rating">Rating (1–5)</label>
         <input id="rating" name="00NgL00000ytr4L" type="number" min="1" max="5" required />
@@ -92,18 +84,17 @@
         <input id="fb_booking" name="00NgL00000yZoNy" maxlength="50" type="text" required />
 
         <label for="feedback_text">Feedback</label>
-        <textarea id="feedback_text" name="00NgL00000ytpqX" rows="3" required></textarea>
+        <textarea id="feedback_text" name="00NgL00000ytpqX" rows="4" required></textarea>
 
-        <input type="submit" name="submit" value="Submit Feedback" />
-        <div id="feedbackConfirm" class="confirmation">✅ Feedback submitted successfully!</div>
+        <input type="submit" value="Submit Feedback" />
       </form>
     </div>
 
     <!-- Complaint Form -->
     <div id="complaint" class="form-section">
-      <form onsubmit="handleSubmit(event, 'complaintConfirm')" action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgL0000045BoX" method="POST">
+      <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgL0000045BoX" method="POST">
         <input type="hidden" name="orgid" value="00DgL0000045BoX" />
-        <input type="hidden" name="retURL" value="http://" />
+        <input type="hidden" name="retURL" value="success.html" />
 
         <label for="cp_name">Contact Name</label>
         <input id="cp_name" name="name" maxlength="80" type="text" required />
@@ -121,32 +112,19 @@
         <textarea id="cp_description" name="description" required></textarea>
 
         <label for="cp_booking">Booking ID</label>
-        <input id="cp_booking" name="00NgL00000yZoNy" maxlength="50" type="text" required />
+        <input id="cp_booking" name="00NgL00000yZoNy" maxlength="50" type="text" />
 
         <input type="submit" value="Submit Complaint" />
-        <div id="complaintConfirm" class="confirmation">✅ Complaint submitted successfully!</div>
       </form>
     </div>
   </div>
 
   <script>
     function showForm(formId) {
-      document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
-      document.getElementById(formId).classList.add('active');
-    }
-
-    function handleSubmit(event, confirmId) {
-      event.preventDefault();
-      const form = event.target;
-      const formData = new FormData(form);
-      fetch(form.action, {
-        method: "POST",
-        body: formData,
-        mode: "no-cors"
-      }).then(() => {
-        document.getElementById(confirmId).style.display = 'block';
-        form.reset();
+      document.querySelectorAll('.form-section').forEach(section => {
+        section.classList.remove('active');
       });
+      document.getElementById(formId).classList.add('active');
     }
   </script>
 </body>
