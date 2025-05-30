@@ -41,7 +41,7 @@
       display: block; margin-top: 1rem; margin-bottom: 0.3rem;
       font-weight: 600; text-shadow: 1px 1px 1px #000;
     }
-    input[type="text"], input[type="email"], textarea {
+    input[type="text"], input[type="email"], input[type="number"], textarea {
       width: 100%; padding: 0.65rem; border-radius: 8px; border: none; font-size: 1rem;
       background: rgba(255,255,255,0.9); color: #333;
     }
@@ -52,6 +52,16 @@
       font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: background 0.3s;
     }
     input[type="submit"]:hover { background-color: #45a049; }
+    .message {
+      text-align: center;
+      margin-top: 1rem;
+      font-weight: bold;
+      color: #d4ffdc;
+      background-color: rgba(0, 128, 0, 0.3);
+      padding: 10px;
+      border-radius: 6px;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -66,31 +76,26 @@
       <button type="button" onclick="showForm('complaint')">Complaint</button>
     </div>
 
-    <!-- Feedback Form: Updated fields -->
+    <!-- Feedback Form -->
     <div id="feedback" class="form-section">
-      <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgL0000045BoX" method="POST">
-        <input type="hidden" name="orgid" value="00DgL0000045BoX" />
-        <input type="hidden" name="retURL" value="http://" />
-
-        <label for="rating">Rating</label>
-        <input id="rating" name="00NgL00000ytr4L" type="text" size="20" />
+      <form onsubmit="return handleSubmit(event, 'feedback-msg')">
+        <label for="rating">Rating (1-5)</label>
+        <input id="rating" name="rating" type="number" min="1" max="5" required />
 
         <label for="fb_booking">Booking ID</label>
-        <input id="fb_booking" name="00NgL00000yZoNy" maxlength="50" type="text" size="20" />
+        <input id="fb_booking" name="bookingId" maxlength="50" type="text" required />
 
         <label for="feedback_text">Feedback</label>
-        <textarea id="feedback_text" name="00NgL00000ytpqX" rows="3" wrap="soft"></textarea>
+        <textarea id="feedback_text" name="feedbackText" rows="3" required></textarea>
 
         <input type="submit" name="submit" value="Submit Feedback" />
+        <div class="message" id="feedback-msg">✅ Feedback submitted successfully!</div>
       </form>
     </div>
 
-    <!-- Complaint Form (includes email) -->
+    <!-- Complaint Form -->
     <div id="complaint" class="form-section">
-      <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgL0000045BoX" method="POST">
-        <input type="hidden" name="orgid" value="00DgL0000045BoX" />
-        <input type="hidden" name="retURL" value="http://" />
-
+      <form onsubmit="return handleSubmit(event, 'complaint-msg')">
         <label for="cp_name">Contact Name</label>
         <input id="cp_name" name="name" maxlength="80" type="text" required />
 
@@ -104,21 +109,32 @@
         <input id="cp_subject" name="subject" maxlength="80" type="text" required />
 
         <label for="cp_description">Description</label>
-        <textarea id="cp_description" name="description"></textarea>
+        <textarea id="cp_description" name="description" required></textarea>
 
         <label for="cp_booking">Booking ID</label>
-        <input id="cp_booking" name="00NgL00000yZoNy" maxlength="50" type="text" />
+        <input id="cp_booking" name="bookingId" maxlength="50" type="text" required />
 
         <input type="submit" value="Submit Complaint" />
+        <div class="message" id="complaint-msg">✅ Complaint submitted successfully!</div>
       </form>
     </div>
-
   </div>
 
   <script>
     function showForm(formId) {
       document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
       document.getElementById(formId).classList.add('active');
+    }
+
+    function handleSubmit(event, messageId) {
+      event.preventDefault();
+      const message = document.getElementById(messageId);
+      message.style.display = 'block';
+      setTimeout(() => {
+        message.style.display = 'none';
+      }, 4000);
+      event.target.reset();
+      return false;
     }
   </script>
 </body>
