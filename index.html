@@ -91,15 +91,6 @@
         <input type="hidden" name="orgid" value="00DgL0000045BoX">
         <input type="hidden" name="retURL" value="https://garvit0822.github.io/Sheldometnxpage/">
 
-        <label for="cp_name">Contact Name</label>
-        <input id="cp_name" name="name" maxlength="80" type="text" required />
-
-        <label for="cp_email">Email</label>
-        <input id="cp_email" name="email" maxlength="80" type="email" required />
-
-        <label for="cp_phone">Phone</label>
-        <input id="cp_phone" name="phone" maxlength="40" type="text" />
-
         <label for="cp_subject">Subject</label>
         <input id="cp_subject" name="subject" maxlength="80" type="text" required />
 
@@ -119,6 +110,26 @@
       document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
       document.getElementById(formId).classList.add('active');
     }
+
+    // Autofill booking ID from URL and make field readonly if present
+    window.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const bookingId = urlParams.get('booking_id');
+
+      const fbBookingField = document.getElementById('fb_booking');
+      const cpBookingField = document.getElementById('cp_booking');
+
+      if (bookingId) {
+        if (fbBookingField) {
+          fbBookingField.value = bookingId;
+          fbBookingField.readOnly = true;
+        }
+        if (cpBookingField) {
+          cpBookingField.value = bookingId;
+          cpBookingField.readOnly = true;
+        }
+      }
+    });
   </script>
 </body>
 </html>
